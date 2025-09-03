@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # Portfolio — Data Analyst (Streamlit)
 
@@ -35,3 +36,7 @@ portfolio_streamlit/
 ├─ requirements.txt
 └─ README.md
 ```
+=======
+# portofolio-lyes
+exemple de compétences acquises 
+>>>>>>> fd917feaf93737360c834d51afe2453c2a70f3ee
