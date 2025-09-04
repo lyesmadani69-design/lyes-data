@@ -5,6 +5,7 @@ import numpy as np
 from pathlib import Path
 import base64
 import json
+from typing import Optional
 
 # ===================== CONFIG APP =====================
 st.set_page_config(page_title="Portfolio Data Analyst", page_icon="📊", layout="wide")
@@ -189,14 +190,14 @@ PROJECTS = [
         "title": "Analyse Pareto 20/80",
         "summary": "Analyse des ventes : distribution 20/80, identification des catégories majeures et recommandations d’assortiment.",
         "skills": ["Python", "Pandas", "Matplotlib"],
-        "image": "capture.png",           # dans assets/ si dispo
+        "image": "kpi.four.png",           # dans assets/ si dispo
         "report": "pareto.pdf",           # dans assets/ si dispo
         "extras": ["assets-pareto.png"],  # images additionnelles
         "repo": "",
-        "demo": ""
+        "demo": "pareto.pdf"
     },
     {
-        "title": "Ventes mensuelles",
+        "title": "",
         "summary": "Tendance, saisonnalité, détection des pics.",
         "skills": ["Python", "Pandas"],
         "image": "dash.png",
@@ -515,9 +516,9 @@ with tab_gallery:
         st.image(str(grid_path), use_container_width=True,
                  caption="Erreur par couple (α, β) — plus bas = mieux")
         st.markdown(r"""
-**Interprétation (opti par RMSE).**  
-Évaluation d'une grille de couples \((\alpha,\beta)\) avec calcul de la **RMSE** pour chacun.  
-La **RMSE la plus faible** est obtenue pour un couple \(\alpha\) élevé et \(\beta\) faible : niveau réactif, tendance lissée.  
+**Interprétation (opti par RMSE).**
+Évaluation d'une grille de couples \((\alpha,\beta)\) avec calcul de la **RMSE** pour chacun.
+La **RMSE la plus faible** est obtenue pour un couple \(\alpha\) élevé et \(\beta\) faible : niveau réactif, tendance lissée.
 *Valider sur un jeu de test pour confirmer la performance hors-échantillon.*
 """)
     else:
@@ -526,28 +527,53 @@ La **RMSE la plus faible** est obtenue pour un couple \(\alpha\) élevé et \(\b
     st.write("---")
 
     # PDF (upload + téléchargement + aperçu)
-    st.subheader("📄 Rapports (PDF)")
-    pdf_up = st.file_uploader("Ajouter un PDF", type=["pdf"], key="pdf_uploader")
-    if pdf_up is not None:
-        dest = save_uploaded_file(ASSETS, pdf_up)
-        st.success(f"Ajouté : {dest.name}")
+    # --- PDF (upload + téléchargement + aperçu robuste) ---
+import io
 
-    pdfs = sorted(ASSETS.glob("*.pdf"), key=lambda p: p.name.lower())
-    if not pdfs:
-        st.info("Aucun PDF trouvé. Dépose des fichiers ici ou place-les dans assets/.")
-    else:
-        for p in pdfs:
-            with st.container(border=True):
-                st.write(f"**{p.name}**")
-                st.download_button(
-                    "💾 Télécharger",
-                    data=p.read_bytes(),
-                    file_name=p.name,
-                    mime="application/pdf",
-                    key=f"dl_{p.name}",
-                    use_container_width=True
-                )
-                if st.toggle("🔍 Aperçu", key=f"prev_{p.name}"):
+st.subheader("📄 Rapports (PDF)")
+pdf_up = st.file_uploader("Ajouter un PDF", type=["pdf"], key="pdf_uploader")
+if pdf_up is not None:
+    dest = ASSETS / pdf_up.name
+    i = 1
+    while dest.exists():
+        dest = ASSETS / f"{Path(pdf_up.name).stem}_{i}.pdf"
+        i += 1
+    dest.write_bytes(pdf_up.getbuffer())
+    st.success(f"Ajouté : {dest.name}")
+
+pdfs = sorted(ASSETS.glob("*.pdf"), key=lambda p: p.name.lower())
+if not pdfs:
+    st.info("Aucun PDF trouvé. Dépose des fichiers ici ou place-les dans assets/.")
+else:
+    for p in pdfs:
+        with st.container(border=True):
+            st.write(f"**{p.name}**")
+
+            # Bouton télécharger (100% fiable)
+            st.download_button(
+                "💾 Télécharger",
+                data=p.read_bytes(),
+                file_name=p.name,
+                mime="application/pdf",
+                key=f"dl_{p.name}",
+                use_container_width=True
+            )
+
+            # Aperçu image (1ʳᵉ page) pour contourner les blocages iframe
+            show_preview = st.toggle("🔍 Aperçu", key=f"prev_{p.name}")
+            if show_preview:
+                try:
+                    import fitz  # PyMuPDF
+                    doc = fitz.open(p)  # peut ouvrir via Path
+                    page = doc.load_page(0)  # première page
+                    pix = page.get_pixmap(dpi=144)  # résolution correcte
+                    img_bytes = pix.tobytes("png")
+                    st.image(img_bytes, use_container_width=True, caption=f"Prévisualisation — {p.name}")
+                    doc.close()
+                except Exception as e:
+                    # Fallback: tenter l'iframe base64 (peut être bloqué par le navigateur)
+                    st.info("Prévisualisation image indisponible, tentative en iframe (peut être bloquée par votre navigateur).")
+                    import base64
                     b64 = base64.b64encode(p.read_bytes()).decode("utf-8")
                     st.markdown(
                         f'<iframe src="data:application/pdf;base64,{b64}" width="100%" height="600"></iframe>',
