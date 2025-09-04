@@ -6,6 +6,7 @@ from pathlib import Path
 import base64
 import json
 from typing import Optional
+import fitz  # PyMuPDF
 
 # ===================== CONFIG APP =====================
 st.set_page_config(page_title="Portfolio Data Analyst", page_icon="📊", layout="wide")
