@@ -20,8 +20,8 @@ except Exception:
 # Dossiers ancrés sur le script
 BASE_DIR = Path(__file__).resolve().parent
 ASSETS = BASE_DIR / "assets"
-st.sidebar.write("📂 Contenu du dossier assets :")
-st.sidebar.write([p.name for p in ASSETS.glob("*")])
+#st.sidebar.write("📂 Contenu du dossier assets :")
+#st.sidebar.write([p.name for p in ASSETS.glob("*")])
 DATA_DIR = BASE_DIR / "data"
 UPLOADS_DIR = DATA_DIR / "uploads"
 
@@ -483,14 +483,14 @@ with tab_smooth:
                 except Exception as e:
                     st.error(f"Erreur pendant l'entraînement Holt ou le tracé : {e}")
 
-# --- fin de l'onglet Lissage exp. ---
+    # --- fin de l'onglet Lissage exp. ---
 
-st.subheader("📸 Schéma du double lissage")
-img_path = ASSETS / "doubleliss.png"
-if img_path.exists():
-    st.image(str(img_path), caption="Méthode du double lissage", use_container_width=True)
-else:
-    st.warning("Image 'doubleliss.png' manquante dans assets/")
+    st.subheader("📸 Schéma du double lissage")
+    img_path = ASSETS / "doubleliss.png"
+    if img_path.exists():
+        st.image(str(img_path), caption="Méthode du double lissage", use_container_width=True)
+    else:
+        st.warning("Image 'doubleliss.png' manquante dans assets/")
 
 
 # ===================== GALLERY =====================
