@@ -122,7 +122,7 @@ with st.sidebar:
     if portrait.exists():
         st.image(str(portrait), caption="Lyes", use_container_width=True)
     else:
-        st.info("Place une image 'doubleliss.png' dans assets/ pour l'afficher ici.")
+        st.info("Place une image '' dans assets/ pour l'afficher ici.")
 
     st.write("Je suis Data Analyst spécialisé en data cleaning, data viz et time series.")
     st.write("Basé à Lyon — Disponible en freelance.")
