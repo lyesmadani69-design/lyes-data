@@ -160,9 +160,12 @@ c4.metric("Disponibilité", "Sept. 2025")
 
 
 # ===================== TABS =====================
-tab_home, tab_projects, tab_skills, tab_contact, tab_smooth, tab_gallery = st.tabs(
-    ["Accueil", "Projets", "Compétences", "Contact", "Lissage exp.", "Galerie"]
+tab_home, tab_projects, tab_skills, tab_contact, tab_smooth, tab_gallery, tab_readme = st.tabs(
+    ["Accueil", "Projets", "Compétences", "Contact", "Lissage exp.", "Galerie", "Présentation"]
 )
+
+
+
 
 
 # ===================== HOME =====================
@@ -591,3 +594,19 @@ else:
                         f'<iframe src="data:application/pdf;base64,{b64}" width="100%" height="600"></iframe>',
                         unsafe_allow_html=True
                     )
+
+# ------------------------------------------------------------
+# Onglet Présentation (affiche ton README.md)
+# ------------------------------------------------------------
+with tab_readme:
+    st.subheader("📖 Présentation du Portfolio")
+
+    readme_path = BASE_DIR / "README.md"
+    if readme_path.exists():
+        with open(readme_path, "r", encoding="utf-8") as f:
+            readme_content = f.read()
+        st.markdown(readme_content, unsafe_allow_html=True)
+    else:
+        st.warning("Le fichier README.md est introuvable dans le projet.")
+
+
