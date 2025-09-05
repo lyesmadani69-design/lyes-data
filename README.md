@@ -41,3 +41,10 @@ Pour chaque mission, je propose une démarche simple et claire en **3 étapes** 
 - Plateforme (Malt, Codeur.com, etc.) : **180–250 €/j**  
 
 > ✅ Des tarifs volontairement compétitifs pour permettre aux PME, associations et indépendants d’accéder à des prestations de data analyse professionnelles.
+## 📞 Contact
+
+📧 Email : **lyesmadani69@gmail.com**  
+💼 LinkedIn : [Mon profil LinkedIn](https://www.linkedin.com/in/ton-profil)  
+🌐 GitHub : [Mes projets](https://github.com/lyesmadani69-design)  
+
+👉 N’hésitez pas à me contacter pour un premier échange gratuit !

@@ -136,6 +136,10 @@ with st.sidebar:
             st.download_button("📄 Télécharger mon CV", f, file_name="CV_TonNom.pdf", use_container_width=True)
     else:
         st.caption("Place ton CV dans assets/CV.pdf pour activer le bouton.")
+        st.markdown("## 📞 Contact")
+        st.write("📧 **Email :** lyesmadani69@gmail.com")
+        st.link_button("💼 LinkedIn", "https://www.linkedin.com/in/ton-profil", use_container_width=True)
+        st.link_button("🌐 GitHub", "https://github.com/lyesmadani69-design", use_container_width=True)
 
     # Debug chemins (optionnel)
     if st.checkbox("🔧 Debug chemins", value=False):
@@ -603,7 +607,7 @@ with tab_readme:
 
     readme_path = BASE_DIR / "README.md"
     if readme_path.exists():
-        with open(readme_path, "r", encoding="utf-8") as f:
+        with open(readme_path, "r", encoding="utf-8") as f :
             readme_content = f.read()
         st.markdown(readme_content, unsafe_allow_html=True)
     else:
