@@ -118,7 +118,7 @@ def save_uploaded_file(dirpath: Path, uploaded_file) -> Path:
 # ===================== SIDEBAR =====================
 with st.sidebar:
     st.markdown("## À propos")
-    portrait = ASSETS / "doubleliss.png"  # remplace par ton fichier si dispo
+    portrait = ASSETS / "dash.png"  # remplace par ton fichier si dispo
     if portrait.exists():
         st.image(str(portrait), caption="Lyes", use_container_width=True)
     else:
@@ -193,7 +193,7 @@ PROJECTS = [
         "title": "Analyse Pareto 20/80",
         "summary": "Analyse des ventes : distribution 20/80, identification des catégories majeures et recommandations d’assortiment.",
         "skills": ["Python", "Pandas", "Matplotlib"],
-        "image": "kpi.four.png",           # dans assets/ si dispo
+        "image": "kpi-four.png",           # dans assets/ si dispo
         "report": "pareto.pdf",           # dans assets/ si dispo
         "extras": ["assets-pareto.png"],  # images additionnelles
         "repo": "",
@@ -482,6 +482,15 @@ with tab_smooth:
                     )
                 except Exception as e:
                     st.error(f"Erreur pendant l'entraînement Holt ou le tracé : {e}")
+
+# --- fin de l'onglet Lissage exp. ---
+
+st.subheader("📸 Schéma du double lissage")
+img_path = ASSETS / "doubleliss.png"
+if img_path.exists():
+    st.image(str(img_path), caption="Méthode du double lissage", use_container_width=True)
+else:
+    st.warning("Image 'doubleliss.png' manquante dans assets/")
 
 
 # ===================== GALLERY =====================
