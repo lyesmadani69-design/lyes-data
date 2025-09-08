@@ -1,6 +1,6 @@
 # Portfolio — Data Analyst (Streamlit)
 
-Un portfolio simple et moderne pour présenter tes projets de **data analyse**.
+
 
 ## ⚙️ Comment je travaille
 
