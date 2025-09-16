@@ -294,13 +294,14 @@ with tab_skills:
     - **Reporting automatisé** : Markdown + PDF
     """)
 
-    # Ajout du schéma du pipeline
-        st.image("assets/pipeline.png",
-         caption="🔗 Pipeline d'analyse & imputation",
-         use_column_width=True)
+    st.image(
+    "assets/pipeline.png",
+    caption="🔗 Pipeline d'analyse & imputation",
+    use_column_width=True
+)
 
-             (caption="🔗 Pipeline d'analyse & imputation",
-             use_column_width=True)
+
+        
 
 
 
