@@ -295,7 +295,10 @@ with tab_skills:
     """)
 
     # Ajout du schéma du pipeline
-    st.image("assets/pipeline_competence.png",
+    st.image("assets/pipeline.png",
+         caption="🔗 Pipeline d'analyse & imputation",
+         use_column_width=True)
+
              caption="🔗 Pipeline d'analyse & imputation",
              use_column_width=True)
 
