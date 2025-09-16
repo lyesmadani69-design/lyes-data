@@ -282,11 +282,23 @@ with tab_projects:
 
 # ===================== SKILLS (placeholder simple) =====================
 with tab_skills:
-    st.subheader("🧰 Compétences")
-    st.write("- Python (pandas, numpy, statsmodels)")
-    st.write("- SQL (requêtes analytiques)")
-    st.write("- Data viz (Matplotlib/Plotly) • BI (Power BI)")
-    st.write("- Time series (Holt, Holt-Winters) • KPI (MAE, RMSE, MAPE)")
+    st.subheader("🛠️ Compétences")
+    st.write("""
+    Voici une vue d'ensemble de mes compétences en Data :
+    - **Python** : pandas, numpy, statsmodels
+    - **SQL** : requêtes analytiques
+    - **Data-viz** : Matplotlib, Plotly, BI (Power BI)
+    - **Time series** : Holt, Holt-Winters, optimisation des coefficients
+    - **KPI & métriques** : MAE, RMSE, MAPE
+    - **Machine Learning** : RandomForest, classification, régression
+    - **Reporting automatisé** : Markdown + PDF
+    """)
+
+    # Ajout du schéma du pipeline
+    st.image("assets/pipeline_competence.png",
+             caption="🔗 Pipeline d'analyse & imputation",
+             use_column_width=True)
+
 
 
 # ===================== CONTACT (placeholder) =====================
