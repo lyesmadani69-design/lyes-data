@@ -283,6 +283,7 @@ with tab_projects:
 # ===================== SKILLS (placeholder simple) =====================
 with tab_skills:
     st.subheader("🛠️ Compétences")
+
     st.write("""
     Voici une vue d'ensemble de mes compétences en Data :
     - **Python** : pandas, numpy, statsmodels
@@ -294,11 +295,32 @@ with tab_skills:
     - **Reporting automatisé** : Markdown + PDF
     """)
 
+    # 🔗 Schéma pipeline
     st.image(
-    "assets/pipeline.png",
-    caption="🔗 Pipeline d'analyse & imputation",
-    use_column_width=True
-)
+        "assets/pipeline.png",
+        caption="Pipeline d'analyse & imputation",
+        use_container_width=True
+    )
+
+    # 📸 Aperçu du rapport (capture PNG)
+    st.image(
+        "assets/rapport_2025.png",
+        caption="Aperçu du rapport 2025",
+        use_container_width=True
+    )
+
+    # 📥 Bouton pour télécharger le rapport complet en PDF
+    with open("assets/rapport_2025.pdf", "rb") as pdf_file:
+        st.download_button(
+            label="📥 Télécharger le rapport complet (PDF)",
+            data=pdf_file,
+            file_name="rapport_2025.pdf",
+            mime="application/pdf"
+        )
+
+
+
+
 
 
         
